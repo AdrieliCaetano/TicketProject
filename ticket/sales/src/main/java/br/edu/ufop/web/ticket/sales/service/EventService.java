@@ -2,6 +2,7 @@ package br.edu.ufop.web.ticket.sales.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
@@ -38,6 +39,20 @@ public class EventService {
         EventModel eventModel = EventConverter.toEventModel(eventDomain);
 
         return EventConverter.toSimpleEventRecordDTO(eventRepository.save(eventModel));
+
+    }
+
+    public SimpleEventRecordDTO getEventById(String id) {
+       
+        UUID uuid = UUID.fromString(id);
+        Optional<EventModel> optionalEventModel = eventRepository.findById(uuid);
+
+        if (optionalEventModel.isEmpty()) {
+            return null;
+        }
+
+        EventModel eventModel = optionalEventModel.get();
+        return EventConverter.toSimpleEventRecordDTO(eventModel);
 
     }
 

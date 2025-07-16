@@ -15,6 +15,7 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,6 +32,19 @@ public class SalesController {
 
         List<SimpleSalesRecordDTO> list = salesService.getAllSales();
         return ResponseEntity.ok(list);
+    }
+
+    @GetMapping("/{saleId}")
+    public ResponseEntity<SimpleSalesRecordDTO> getSaleById(@PathVariable(value = "saleId") String id) {
+
+        SimpleSalesRecordDTO simpleSalesRecordDTO = salesService.getSaleById(id);
+
+        if (simpleSalesRecordDTO == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(simpleSalesRecordDTO);
+
     }
 
     @PostMapping

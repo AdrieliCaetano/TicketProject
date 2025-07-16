@@ -2,6 +2,7 @@ package br.edu.ufop.web.ticket.sales.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
@@ -29,6 +30,20 @@ public class SalesService {
         List<SalesModel> salesModelList = salesRepository.findAll();
         
         return salesModelList.stream().map(SalesConverter::toSimpleSalesRecordDTO).toList();
+    }
+
+    public SimpleSalesRecordDTO getSaleById(String id) {
+       
+        UUID uuid = UUID.fromString(id);
+        Optional<SalesModel> optionalSalesModel = salesRepository.findById(uuid);
+
+        if (optionalSalesModel.isEmpty()) {
+            return null;
+        }
+
+        SalesModel salesModel = optionalSalesModel.get();
+        return SalesConverter.toSimpleSalesRecordDTO(salesModel);
+
     }
 
     public SimpleSalesRecordDTO createSale(CreateSaleDTO createSaleDTO){
