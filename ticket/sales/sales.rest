@@ -1,0 +1,134 @@
+GET http://localhost:4000/events
+
+###
+
+POST http://localhost:4000/events
+Content-Type: application/json
+
+{
+  "description": "Esta é a descrição do evento 5",
+  "type": "SHOW",
+  "date": "2025-07-30T01:28:00.123", 
+  "startSales":"2025-06-15T01:28:00.123",
+  "endSales" : "2025-07-15T01:28:00.123",
+  "price": 459.32
+}
+
+###
+
+PUT http://localhost:4000/events
+Content-Type: application/json
+
+{
+  "id": "2bc9bf1d-2a9e-4b03-b291-328364faef54",
+  "description": "Esta é descrição atualizada do evento 4",
+  "type": "CURSO",
+  "date": "2025-09-15T01:28:00.123", 
+  "startSales":"2025-06-15T01:28:00.123",
+  "endSales" : "2025-08-15T01:28:00.123",
+  "price": 149.90
+}
+
+###
+
+PUT http://localhost:4000/events
+Content-Type: application/json
+
+{
+  "id": "2bc9bf1d-2a9e-4b03-b291-328364faef51",
+  "description": "Esta é descrição atualizada do evento 4",
+  "type": "CURSO",
+  "date": "2025-09-15T01:28:00.123", 
+  "startSales":"2025-06-15T01:28:00.123",
+  "endSales" : "2025-08-15T01:28:00.123",
+  "price": 149.90
+}
+
+###
+
+DELETE  http://localhost:4000/events/remove
+Content-Type: application/json
+
+{
+  "id": "9ec6dec9-1d7c-4c56-babe-faf810ea5a93"
+}
+
+
+###
+
+
+###
+
+GET http://localhost:4000/sales
+
+###
+
+POST http://localhost:4000/sales
+Content-Type: application/json
+
+{
+    "user_id": "869a3bb1-eb15-4c1b-ae9e-906b4318fe8d",
+    "event_id": "2bc9bf1d-2a9e-4b03-b291-328364faef54",
+    "saleStatus": "CANCELADO",
+    "saleDate": "2025-07-14T08:28:00.123"
+}
+
+###
+
+POST http://localhost:4000/sales
+Content-Type: application/json
+
+{
+    "user_id": "eaa73260-e9f1-40f2-9f63-d8c93532fdf6",
+    "event_id": "2bc9bf1d-2a9e-4b03-b291-328364faef58",
+    "saleStatus": "EMABERTO",
+    "saleDate": "2025-07-15T01:28:00.123"
+}
+
+###
+
+PUT http://localhost:4000/sales
+Content-Type: application/json
+
+{
+    "id": "19ffde03-e1bb-49aa-b825-87c9d2392190",
+    "user_id": "eaa73260-e9f1-40f2-9f63-d8c93532fdf6",
+    "event_id": "2bc9bf1d-2a9e-4b03-b291-328364faef54",
+    "saleStatus": "ESTORNADO",
+    "saleDate": "2025-07-15T01:28:00.123"
+}
+
+###
+
+PUT http://localhost:4000/sales
+Content-Type: application/json
+
+{
+    "id": "19ffde03-e1bb-49aa-b825-87c9d2392197", 
+    "user_id": "eaa73260-e9f1-40f2-9f63-d8c93532fdf6",
+    "event_id": "2bc9bf1d-2a9e-4b03-b291-328364faef54",
+    "saleStatus": "ESTORNADO",
+    "saleDate": "2025-07-15T01:28:00.123"
+}
+
+###
+
+PUT http://localhost:4000/sales
+Content-Type: application/json
+
+{
+    "id": "19ffde03-e1bb-49aa-b825-87c9d2392190",
+    "user_id": "eaa73260-e9f1-40f2-9f63-d8c93532fdf6",
+    "event_id": "2bc9bf1d-2a9e-4b03-b291-328364faef57",
+    "saleStatus": "ESTORNADO",
+    "saleDate": "2025-07-15T01:28:00.123"
+}
+
+###
+
+DELETE  http://localhost:4000/sales/remove
+Content-Type: application/json
+
+{
+    "id": "19ffde03-e1bb-49aa-b825-87c9d2392190"
+}
