@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.ufop.web.ticket.sales.dtos.event.CreateEventDTO;
 import br.edu.ufop.web.ticket.sales.dtos.event.DeleteEventDTO;
+import br.edu.ufop.web.ticket.sales.dtos.event.EventDTO;
 import br.edu.ufop.web.ticket.sales.dtos.event.SimpleEventRecordDTO;
 import br.edu.ufop.web.ticket.sales.dtos.event.UpdateEventDTO;
 import br.edu.ufop.web.ticket.sales.service.EventService;
@@ -27,23 +28,23 @@ public class EventController {
     private final EventService eventService;
     
     @GetMapping
-    public ResponseEntity<List<SimpleEventRecordDTO>> getAllEvents(){
+    public ResponseEntity<List<EventDTO>> getAllEvents(){
 
-        List<SimpleEventRecordDTO> list = eventService.getAllEvents();
+        List<EventDTO> list = eventService.getAllEvents();
         return ResponseEntity.ok(list);
 
     }
 
     @GetMapping("/{eventId}")
-    public ResponseEntity<SimpleEventRecordDTO> getEventById(@PathVariable(value = "eventId") String id) {
+    public ResponseEntity<EventDTO> getEventById(@PathVariable(value = "eventId") String id) {
 
-        SimpleEventRecordDTO simpleeventRecordDTO = eventService.getEventById(id);
+        EventDTO eventDTO = eventService.getEventById(id);
 
-        if (simpleeventRecordDTO == null) {
+        if (eventDTO == null) {
             return ResponseEntity.notFound().build();
         }
 
-        return ResponseEntity.ok(simpleeventRecordDTO);
+        return ResponseEntity.ok(eventDTO);
 
     }
 

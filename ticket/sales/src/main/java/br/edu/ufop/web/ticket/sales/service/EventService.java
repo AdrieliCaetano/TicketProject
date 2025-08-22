@@ -10,6 +10,7 @@ import br.edu.ufop.web.ticket.sales.converter.EventConverter;
 import br.edu.ufop.web.ticket.sales.domain.EventDomain;
 import br.edu.ufop.web.ticket.sales.dtos.event.CreateEventDTO;
 import br.edu.ufop.web.ticket.sales.dtos.event.DeleteEventDTO;
+import br.edu.ufop.web.ticket.sales.dtos.event.EventDTO;
 import br.edu.ufop.web.ticket.sales.dtos.event.SimpleEventRecordDTO;
 import br.edu.ufop.web.ticket.sales.dtos.event.UpdateEventDTO;
 import br.edu.ufop.web.ticket.sales.models.EventModel;
@@ -22,11 +23,11 @@ public class EventService {
     
     private final IEventRepository eventRepository;
 
-    public List<SimpleEventRecordDTO> getAllEvents(){
+    public List<EventDTO> getAllEvents(){
 
         List<EventModel> eventModelList = eventRepository.findAll();
 
-        return eventModelList.stream().map(EventConverter::toSimpleEventRecordDTO).toList();
+        return eventModelList.stream().map(EventConverter::toEventDTO).toList();
 
     }
 
@@ -42,7 +43,7 @@ public class EventService {
 
     }
 
-    public SimpleEventRecordDTO getEventById(String id) {
+    public EventDTO getEventById(String id) {
        
         UUID uuid = UUID.fromString(id);
         Optional<EventModel> optionalEventModel = eventRepository.findById(uuid);
@@ -52,7 +53,7 @@ public class EventService {
         }
 
         EventModel eventModel = optionalEventModel.get();
-        return EventConverter.toSimpleEventRecordDTO(eventModel);
+        return EventConverter.toEventDTO(eventModel);
 
     }
 

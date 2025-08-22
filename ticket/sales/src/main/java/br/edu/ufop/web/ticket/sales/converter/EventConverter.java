@@ -2,6 +2,7 @@ package br.edu.ufop.web.ticket.sales.converter;
 
 import br.edu.ufop.web.ticket.sales.domain.EventDomain;
 import br.edu.ufop.web.ticket.sales.dtos.event.CreateEventDTO;
+import br.edu.ufop.web.ticket.sales.dtos.event.EventDTO;
 import br.edu.ufop.web.ticket.sales.dtos.event.SimpleEventRecordDTO;
 import br.edu.ufop.web.ticket.sales.dtos.event.UpdateEventDTO;
 import br.edu.ufop.web.ticket.sales.models.EventModel;
@@ -17,6 +18,21 @@ public class EventConverter {
             eventModel.getDate(),
             eventModel.getPrice()
         );
+    }
+
+    public static EventDTO toEventDTO(EventModel eventModel) {
+
+        return EventDTO.builder()
+            .id(eventModel.getId())
+            .description(eventModel.getDescription())
+            .type(eventModel.getType())
+            .date(eventModel.getDate())
+            .startSales(eventModel.getStartSales())
+            .endSales(eventModel.getEndSales())
+            .price(eventModel.getPrice())
+            .createdAt(eventModel.getCreatedAt())
+            .updatedAt(eventModel.getUpdatedAt())
+            .build();
     }
 
     public static EventDomain toEventDomain(CreateEventDTO createEventDTO){

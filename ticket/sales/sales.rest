@@ -54,7 +54,7 @@ DELETE  http://localhost:4000/events/remove
 Content-Type: application/json
 
 {
-  "id": "9ec6dec9-1d7c-4c56-babe-faf810ea5a93"
+  "id": "cadf2930-51b1-48b0-83d5-6b4ecd1df40a"
 }
 
 
@@ -75,9 +75,9 @@ POST http://localhost:4000/sales
 Content-Type: application/json
 
 {
-    "user_id": "869a3bb1-eb15-4c1b-ae9e-906b4318fe8d",
-    "event_id": "2bc9bf1d-2a9e-4b03-b291-328364faef54",
-    "saleStatus": "CANCELADO",
+    "user_id": "eaa73260-e9f1-40f2-9f63-d8c93532fdf6",
+    "event_id": "73f496c6-d05b-4b17-b233-7225939d6664",
+    "saleStatus": "EMABERTO",
     "saleDate": "2025-07-14T08:28:00.123"
 }
 
@@ -138,5 +138,5 @@ DELETE  http://localhost:4000/sales/remove
 Content-Type: application/json
 
 {
-    "id": "19ffde03-e1bb-49aa-b825-87c9d2392190"
+    "id": "54db7574-2777-42c1-b37b-6f3bf86993fa"
 }

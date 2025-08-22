@@ -1,21 +1,16 @@
 import { useEffect, useState } from "react"
-import api from "../../services/api"
-
-interface UserInterface{
-    id: string,
-    name: string,
-    email: string
-}
+import type { IUser } from "../../types/IUser"
+import { getAllUsers } from '../../Repositories/UserRepository'
 
 const ListUsers = () => {
 
     // Hook: useState
-    const [ users, setUsers ] = useState<UserInterface[]>([])
+    const [ users, setUsers ] = useState<IUser[]>([])
 
     // Hook: useEffect
     useEffect(() => {
 
-        api('/api/users')
+        getAllUsers()
             .then(response => {
                 console.log(response)
                 setUsers(response)
@@ -26,20 +21,17 @@ const ListUsers = () => {
 
     return(
 
-        <div>
-            <h2>Lista de usuários</h2>
+        <div style={{ padding: "20px" }}>
+            <h2>Lista de Usuários:</h2>
 
-            <div>
-                {
-                    users.map( user => (
-                        <div>
-                            <p>{user.id}</p>
-                            <p>{user.name}</p>
-                            <p>{user.email}</p>
-                        </div>
-                    ) )
-                }
-            </div>
+            <div className="main-container">
+                {users.map(user => (
+                <div key={user.id} className="main-card">
+                <h3>{user.name}</h3>
+                <p>Email: {user.email}</p>
+          </div>
+        ))}
+      </div>
 
         </div>
 

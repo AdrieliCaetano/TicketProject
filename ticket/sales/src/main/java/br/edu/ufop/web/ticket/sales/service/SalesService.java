@@ -10,12 +10,16 @@ import br.edu.ufop.web.ticket.sales.converter.SalesConverter;
 import br.edu.ufop.web.ticket.sales.domain.SalesDomain;
 import br.edu.ufop.web.ticket.sales.dtos.CreateSaleDTO;
 import br.edu.ufop.web.ticket.sales.dtos.DeleteSaleDTO;
+import br.edu.ufop.web.ticket.sales.dtos.SaleDTO;
 import br.edu.ufop.web.ticket.sales.dtos.SimpleSalesRecordDTO;
 import br.edu.ufop.web.ticket.sales.dtos.UpdateSaleDTO;
+import br.edu.ufop.web.ticket.sales.dtos.externals.notifications.CreateNotificationDTO;
+import br.edu.ufop.web.ticket.sales.dtos.externals.notifications.NotificationDTO;
 import br.edu.ufop.web.ticket.sales.models.EventModel;
 import br.edu.ufop.web.ticket.sales.models.SalesModel;
 import br.edu.ufop.web.ticket.sales.repositories.IEventRepository;
 import br.edu.ufop.web.ticket.sales.repositories.ISalesRepository;
+import br.edu.ufop.web.ticket.sales.service.clients.NotificationServiceClient;
 import lombok.AllArgsConstructor;
 
 @Service
@@ -24,15 +28,16 @@ public class SalesService {
     
     private final ISalesRepository salesRepository;
     private final IEventRepository eventRepository;
+    private NotificationServiceClient notificationServiceClient;
 
-    public List<SimpleSalesRecordDTO> getAllSales(){
+    public List<SaleDTO> getAllSales(){
         
         List<SalesModel> salesModelList = salesRepository.findAll();
         
-        return salesModelList.stream().map(SalesConverter::toSimpleSalesRecordDTO).toList();
+        return salesModelList.stream().map(SalesConverter::toSaleDTO).toList();
     }
 
-    public SimpleSalesRecordDTO getSaleById(String id) {
+    public SaleDTO getSaleById(String id) {
        
         UUID uuid = UUID.fromString(id);
         Optional<SalesModel> optionalSalesModel = salesRepository.findById(uuid);
@@ -42,7 +47,7 @@ public class SalesService {
         }
 
         SalesModel salesModel = optionalSalesModel.get();
-        return SalesConverter.toSimpleSalesRecordDTO(salesModel);
+        return SalesConverter.toSaleDTO(salesModel);
 
     }
 
@@ -104,6 +109,23 @@ public class SalesService {
 
         salesRepository.delete(optionalSalesModel.get());
 
+    }
+
+    private void sendNotification(SalesModel saleModel) {
+
+        CreateNotificationDTO createNotificationDTO =
+            new CreateNotificationDTO(
+                saleModel.getUser_id(),
+                "SALES",
+                "MESSAGE",
+                "Ticket Sales",
+                "Event " + saleModel.getEventModel().getDescription()
+            );
+
+        NotificationDTO notificationDTO = 
+            notificationServiceClient.create(createNotificationDTO);
+            
+        System.out.println(notificationDTO);
     }
 
 }

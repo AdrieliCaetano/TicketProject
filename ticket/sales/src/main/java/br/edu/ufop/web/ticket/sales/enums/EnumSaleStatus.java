@@ -7,11 +7,11 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum EnumSaleStatus {
     
-    EMABERTO(1, "Em aberto"),
-    PAG0(2,"Pago"),
+    EM_ABERTO(1, "Em aberto"),
+    PAGO(2,"Pago"),
     CANCELADO(3, "Cancelado"),
-    ESTORNADO(4, "Estornado");
-    // OUTRO(5, "Outro");
+    ESTORNADO(4, "Estornado"),
+    OUTRO(5, "Outro");
 
     private Integer id;
     private String description;

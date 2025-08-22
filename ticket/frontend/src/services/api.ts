@@ -1,15 +1,14 @@
 const SERVER = 'http://localhost:8080'
 
+const api = async <T>(endpoint: string, config?: RequestInit): Promise<T> => {
+  console.log('Endpoint: ' + SERVER + endpoint);
+  
+  const result = await fetch(SERVER + endpoint, config);
 
-const api = async (endpoint : string, config? : RequestInit) => {
-
-    console.log('Endpoint: ' + SERVER + endpoint)
-    console.log(`Endpoint: (TL) ${SERVER}${endpoint}`)
-
-    const result = await fetch(SERVER + endpoint, config)
-    return await result.json()
-
+  if (!result.ok) {
+    throw new Error(`API Error: ${result.status} ${result.statusText}`);
+  }
+  return await result.json() as T;
 }
 
-export default api // import api from ... 
-// export { api } // import { api } from ...
+export default api;
